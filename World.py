@@ -1,20 +1,20 @@
 import random
+from funcs import *
 # from pprint import pprint
 
 
-def incrange(start, end):
-    return range(start, end + 1)
-
-
 class World(object):
-    """docstring for ClassName"""
+    """ Physical features of world map """
     def __init__(self, width, height):
         self.width = width
         self.height = height
 
         self.grid = [[0 for x in range(width)] for y in range(height)]
 
-    def generate(self):
+    def generateNations(self):
+        pass
+
+    def generateNation(self):
         pass
 
     def generateContinent(self):
