@@ -24,10 +24,14 @@ class View(object):
         for x in range(0, width):
             for y in range(0, height):
                 if world.grid[y][x]:
+                    try:
+                        color = world.grid[y][x].color
+                    except:
+                        color = "green"
+
                     canvas.create_rectangle(x * scale,
                                             y * scale,
                                             (x + 1) * scale,
                                             (y + 1) * scale,
-                                            fill="green")
-
+                                            fill=color)
         root.mainloop()
