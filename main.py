@@ -7,9 +7,7 @@ random.seed(10)
 
 world1 = World(30, 15)
 world1.generateContinent()
-world1.indexTiles()
-
-# world1.generateNations(10)
+world1.generateSettlements()
 
 # pprint(world1.grid)
 

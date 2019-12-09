@@ -28,10 +28,6 @@ class World(object):
                 if self.grid[y][x]:
                     self.tiles.append(self.grid[y][x])
 
-        # for tile in self.tiles:
-        #     print( (tile.x, tile.y) )
-        # print(len(self.tiles))
-
     def generateContinent(self):
         # x = random.randint(0, self.width - 1)
         # y = random.randint(0, self.height - 1)
@@ -47,6 +43,12 @@ class World(object):
             if self.grid[y][x] == 0 and random.randint(0, 100) < 30:
                 queue += self.adjacent(x, y)
                 self.grid[y][x] = Tile(x, y)
+
+        self.indexTiles()
+
+    def generateSettlements(self):
+        for tile in self.tiles:
+            tile.settle()
 
     def adjacent(self, x_start, y_start):
         square = []
