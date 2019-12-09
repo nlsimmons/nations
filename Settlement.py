@@ -7,9 +7,13 @@ colors = ("dark olive green", "dark khaki", "gold", "firebrick1", "khaki",
 
 
 class Settlement():
-    def __init__(self, owner=None):
+    def __init__(self, world, nation=None):
+        self.world = world
         self.color = random.choice(colors)
-        if owner is None:
-            owner = Nation(color=self.color,
+        if nation is None:
+            nation = Nation(world=world,
+                           color=self.color,
                            capital=self)
-        self.owner = owner
+        self.nation = nation
+        self.population = 10
+        self.satisfaction = 5

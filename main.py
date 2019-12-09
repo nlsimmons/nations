@@ -3,12 +3,20 @@ from View import View
 import random
 # from pprint import pprint
 
-random.seed(10)
+random.seed(1)
+
+print("Generating world...")
 
 world1 = World(30, 15)
-world1.generateContinent()
+
+world1.generateContinent(300)
+
+print("Generating settlements...")
+
 world1.generateSettlements()
 
-# pprint(world1.grid)
+# world1.doRound()
+
+# print("Doing round...")
 
 View(world=world1, scale=30)

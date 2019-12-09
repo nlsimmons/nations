@@ -9,17 +9,15 @@ class World(object):
         self.width = width
         self.height = height
         self.tiles = []
-        self.settlements = []
+        self.year = 0
 
         self.grid = [[0 for x in range(width)] for y in range(height)]
 
-    def randomLand(self):
-        while True:
-            x = random.randint(0, self.width - 1)
-            y = random.randint(0, self.height - 1)
-
-            if self.grid[y][x]:
-                return self.grid[y][x]
+    def doRound(self):
+        # year += 1
+        random.shuffle(self.tiles)
+        # for tile in self.tiles:
+            # tile.nation.
 
     def indexTiles(self):
         self.tiles = []
@@ -28,21 +26,21 @@ class World(object):
                 if self.grid[y][x]:
                     self.tiles.append(self.grid[y][x])
 
-    def generateContinent(self):
+    def generateContinent(self, size):
         # x = random.randint(0, self.width - 1)
         # y = random.randint(0, self.height - 1)
-        x = round((0 + self.width) / 2)
-        y = round((0 + self.height) / 2)
+        x = round(self.width / 2)
+        y = round(self.height / 2)
 
-        self.grid[y][x] = Tile(x, y)
+        self.grid[y][x] = Tile(self, x, y)
 
-        queue = self.adjacent(x, y)
+        queue = adjacent(x, y, self.width, self.height)
+
         while len(queue):
-            random.shuffle(queue)
-            (x, y, tile) = queue.pop()
-            if self.grid[y][x] == 0 and random.randint(0, 100) < 30:
-                queue += self.adjacent(x, y)
-                self.grid[y][x] = Tile(x, y)
+            (x, y) = queue.pop()
+            if self.grid[y][x] == 0 and random.randint(0, 1000) < size:
+                queue += adjacent(x, y, self.width, self.height)
+                self.grid[y][x] = Tile(self, x, y)
 
         self.indexTiles()
 
@@ -50,16 +48,3 @@ class World(object):
         for tile in self.tiles:
             tile.settle()
 
-    def adjacent(self, x_start, y_start):
-        square = []
-        for x in incrange(x_start - 1, x_start + 1):
-            for y in incrange(y_start - 1, y_start + 1):
-                if (x == x_start and y == y_start or
-                   x < 0 or x >= self.width or
-                   y < 0 or y >= self.height):
-                    continue
-                try:
-                    square.append((x, y, self.grid[y][x]))
-                except IndexError:
-                    pass
-        return square
