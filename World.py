@@ -47,4 +47,3 @@ class World(object):
     def generateSettlements(self):
         for tile in self.tiles:
             tile.settle()
-

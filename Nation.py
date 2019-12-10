@@ -1,9 +1,10 @@
 from Language import Language
 from Leader import Leader
+from Entity import Entity
 from funcs import *
 
 
-class Nation():
+class Nation(Entity):
     def __init__(self, world, color, capital):
         self.world = world
         self.color = color
@@ -12,7 +13,7 @@ class Nation():
 
         self.language = Language()
         self.name = self.language.genName()
-        self.leader = Leader(self.language.genName())
+        self.leader = self.genLeader()
 
     def borders(self):
         border_tiles = []
@@ -28,6 +29,9 @@ class Nation():
             if tile in owned_tiles:
                 border_tiles.remove(tile)
         return border_tiles
+
+    def genLeader(self):
+        return Leader(self.language.genName())
 
     def action(self):
         pass

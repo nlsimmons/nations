@@ -1,5 +1,5 @@
-from Settlement import Settlement
 import random
+from Settlement import Settlement
 
 
 class Tile():
@@ -13,3 +13,18 @@ class Tile():
     def settle(self):
         self.settlement = Settlement(self.world)
         self.color = self.settlement.color
+
+    def getInfo(self):
+        string = f"({self.x}, {self.y}); Fertility: {self.fertility}\n"\
+                 f"Settlement: {self.settlement}\n"\
+                 f"Led by {self.settlement.leader}\n"\
+                 f"Owned by {self.settlement.nation}\n"\
+                 f"Ruled by {self.settlement.nation.leader}\n"\
+                 f"---------------\n"\
+                 f"{self.settlement.leader}'s Traits:\n"\
+                 f"{self.settlement.leader.getTraits()}\n"\
+                 f"---------------\n"\
+                 f"{self.settlement.nation.leader}'s Traits:\n"\
+                 f"{self.settlement.nation.leader.getTraits()}\n"\
+
+        return string
